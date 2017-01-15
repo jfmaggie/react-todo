@@ -7,7 +7,8 @@ const todos = (state = [], action) => {
         ...state,
         {
           text: action.text,
-          completed: false
+          completed: false,
+          id: action.id
         }
       ];
 
@@ -16,6 +17,15 @@ const todos = (state = [], action) => {
   }
 };
 
-const reducers = combineReducers({ todos: todos });
+const nextTodoId = (state = 1, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return state + 1;
+    default:
+      return state;
+  }
+};
+
+const reducers = combineReducers({ todos: todos, nextTodoId: nextTodoId });
 
 export default reducers;

@@ -24398,7 +24398,8 @@
 	
 	var App = function App(_ref) {
 	  var todos = _ref.todos,
-	      onAddTodoClick = _ref.onAddTodoClick;
+	      onAddTodoClick = _ref.onAddTodoClick,
+	      nextTodoId = _ref.nextTodoId;
 	
 	  var input = void 0;
 	
@@ -24411,7 +24412,7 @@
 	    _react2.default.createElement(
 	      'button',
 	      { onClick: function onClick() {
-	          onAddTodoClick(input.value);
+	          onAddTodoClick(input.value, nextTodoId);
 	          input.value = '';
 	        } },
 	      'Add Todo'
@@ -24457,7 +24458,8 @@
 	    case "ADD_TODO":
 	      return [].concat(_toConsumableArray(state), [{
 	        text: action.text,
-	        completed: false
+	        completed: false,
+	        id: action.id
 	      }]);
 	
 	    default:
@@ -24465,7 +24467,19 @@
 	  }
 	};
 	
-	var reducers = (0, _redux.combineReducers)({ todos: todos });
+	var nextTodoId = function nextTodoId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "ADD_TODO":
+	      return state + 1;
+	    default:
+	      return state;
+	  }
+	};
+	
+	var reducers = (0, _redux.combineReducers)({ todos: todos, nextTodoId: nextTodoId });
 	
 	exports.default = reducers;
 
@@ -24496,16 +24510,18 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    todos: state.todos
+	    todos: state.todos,
+	    nextTodoId: state.nextTodoId
 	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    onAddTodoClick: function onAddTodoClick(text) {
+	    onAddTodoClick: function onAddTodoClick(text, id) {
 	      dispatch({
 	        type: "ADD_TODO",
-	        text: text
+	        text: text,
+	        id: id
 	      });
 	    }
 	  };

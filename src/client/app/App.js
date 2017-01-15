@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const App = ({ todos, onAddTodoClick }) => {
+const App = ({ todos, onAddTodoClick, nextTodoId }) => {
   let input;
 
   return (
@@ -10,9 +10,9 @@ const App = ({ todos, onAddTodoClick }) => {
         input = node
       }} />
       <button onClick={() => {
-        onAddTodoClick(input.value)
+        onAddTodoClick(input.value, nextTodoId)
         input.value = ''
-      }} >Add Todo</button>  
+      }} >Add Todo</button>
       <ul>
         {todos.map((todo, index) =>
           <li key={index}>{todo.text}</li>

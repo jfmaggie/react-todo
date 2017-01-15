@@ -4,16 +4,18 @@ import App from '../App';
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos
+    todos: state.todos,
+    nextTodoId: state.nextTodoId
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddTodoClick: (text) => {
+    onAddTodoClick: (text, id) => {
       dispatch({
         type: "ADD_TODO",
-        text: text
+        text: text,
+        id: id
       });
     }
   };
