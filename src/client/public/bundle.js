@@ -59,11 +59,11 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _App = __webpack_require__(/*! ./components/App */ 217);
+	var _App = __webpack_require__(/*! ./components/App */ 216);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _reducers = __webpack_require__(/*! ./reducers */ 223);
+	var _reducers = __webpack_require__(/*! ./reducers */ 225);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -24378,8 +24378,7 @@
 	}
 
 /***/ },
-/* 216 */,
-/* 217 */
+/* 216 */
 /*!******************************************!*\
   !*** ./src/client/app/components/App.js ***!
   \******************************************/
@@ -24395,15 +24394,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Footer = __webpack_require__(/*! ./Footer */ 218);
+	var _Footer = __webpack_require__(/*! ./Footer */ 217);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _TodoListContainer = __webpack_require__(/*! ../containers/TodoListContainer */ 221);
+	var _TodoListContainer = __webpack_require__(/*! ../containers/TodoListContainer */ 220);
 	
 	var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
 	
-	var _AddTodoContainer = __webpack_require__(/*! ../containers/AddTodoContainer */ 225);
+	var _AddTodoContainer = __webpack_require__(/*! ../containers/AddTodoContainer */ 223);
 	
 	var _AddTodoContainer2 = _interopRequireDefault(_AddTodoContainer);
 	
@@ -24422,7 +24421,7 @@
 	exports.default = App;
 
 /***/ },
-/* 218 */
+/* 217 */
 /*!*********************************************!*\
   !*** ./src/client/app/components/Footer.js ***!
   \*********************************************/
@@ -24438,7 +24437,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _FilterLink = __webpack_require__(/*! ../containers/FilterLink */ 219);
+	var _FilterLink = __webpack_require__(/*! ../containers/FilterLink */ 218);
 	
 	var _FilterLink2 = _interopRequireDefault(_FilterLink);
 	
@@ -24473,7 +24472,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 219 */
+/* 218 */
 /*!*************************************************!*\
   !*** ./src/client/app/containers/FilterLink.js ***!
   \*************************************************/
@@ -24491,7 +24490,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _Link = __webpack_require__(/*! ../components/Link */ 220);
+	var _Link = __webpack_require__(/*! ../components/Link */ 219);
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
@@ -24519,7 +24518,7 @@
 	exports.default = FilterLink;
 
 /***/ },
-/* 220 */
+/* 219 */
 /*!*******************************************!*\
   !*** ./src/client/app/components/Link.js ***!
   \*******************************************/
@@ -24563,7 +24562,7 @@
 	exports.default = Link;
 
 /***/ },
-/* 221 */
+/* 220 */
 /*!********************************************************!*\
   !*** ./src/client/app/containers/TodoListContainer.js ***!
   \********************************************************/
@@ -24581,7 +24580,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _TodoList = __webpack_require__(/*! ../components/TodoList */ 222);
+	var _TodoList = __webpack_require__(/*! ../components/TodoList */ 221);
 	
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 	
@@ -24624,7 +24623,7 @@
 	exports.default = TodoListContainer;
 
 /***/ },
-/* 222 */
+/* 221 */
 /*!***********************************************!*\
   !*** ./src/client/app/components/TodoList.js ***!
   \***********************************************/
@@ -24640,7 +24639,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Todo = __webpack_require__(/*! ./Todo */ 224);
+	var _Todo = __webpack_require__(/*! ./Todo */ 222);
 	
 	var _Todo2 = _interopRequireDefault(_Todo);
 	
@@ -24661,81 +24660,7 @@
 	exports.default = TodoList;
 
 /***/ },
-/* 223 */
-/*!******************************************!*\
-  !*** ./src/client/app/reducers/index.js ***!
-  \******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(/*! redux */ 189);
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	var todos = function todos() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case "ADD_TODO":
-	      return [].concat(_toConsumableArray(state), [{
-	        text: action.text,
-	        completed: false,
-	        id: action.id
-	      }]);
-	    case "TOGGLE_TODO":
-	      return state.map(function (todo) {
-	        if (todo.id === action.id) {
-	          return Object.assign({}, todo, {
-	            completed: !todo.completed
-	          });
-	        }
-	        return todo;
-	      });
-	    default:
-	      return state;
-	  }
-	};
-	
-	var nextTodoId = function nextTodoId() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case "ADD_TODO":
-	      return state + 1;
-	    default:
-	      return state;
-	  }
-	};
-	
-	var visibilityFilter = function visibilityFilter() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "SHOW_ALL";
-	  var action = arguments[1];
-	
-	  switch (action.type) {
-	    case "SET_VISIBILITY_FILTER":
-	      return action.filter;
-	    default:
-	      return state;
-	  }
-	};
-	
-	var reducers = (0, _redux.combineReducers)({
-	  todos: todos,
-	  nextTodoId: nextTodoId,
-	  visibilityFilter: visibilityFilter
-	});
-	
-	exports.default = reducers;
-
-/***/ },
-/* 224 */
+/* 222 */
 /*!*******************************************!*\
   !*** ./src/client/app/components/Todo.js ***!
   \*******************************************/
@@ -24774,7 +24699,7 @@
 	exports.default = Todo;
 
 /***/ },
-/* 225 */
+/* 223 */
 /*!*******************************************************!*\
   !*** ./src/client/app/containers/AddTodoContainer.js ***!
   \*******************************************************/
@@ -24792,7 +24717,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _AddTodo = __webpack_require__(/*! ../components/AddTodo */ 226);
+	var _AddTodo = __webpack_require__(/*! ../components/AddTodo */ 224);
 	
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 	
@@ -24821,7 +24746,7 @@
 	exports.default = AddTodoContainer;
 
 /***/ },
-/* 226 */
+/* 224 */
 /*!**********************************************!*\
   !*** ./src/client/app/components/AddTodo.js ***!
   \**********************************************/
@@ -24863,6 +24788,137 @@
 	};
 	
 	exports.default = AddTodo;
+
+/***/ },
+/* 225 */
+/*!******************************************!*\
+  !*** ./src/client/app/reducers/index.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(/*! redux */ 189);
+	
+	var _todos = __webpack_require__(/*! ./todos */ 226);
+	
+	var _todos2 = _interopRequireDefault(_todos);
+	
+	var _nextTodoId = __webpack_require__(/*! ./nextTodoId */ 227);
+	
+	var _nextTodoId2 = _interopRequireDefault(_nextTodoId);
+	
+	var _visibilityFilter = __webpack_require__(/*! ./visibilityFilter */ 228);
+	
+	var _visibilityFilter2 = _interopRequireDefault(_visibilityFilter);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var reducers = (0, _redux.combineReducers)({
+	  todos: _todos2.default,
+	  nextTodoId: _nextTodoId2.default,
+	  visibilityFilter: _visibilityFilter2.default
+	});
+	
+	exports.default = reducers;
+
+/***/ },
+/* 226 */
+/*!******************************************!*\
+  !*** ./src/client/app/reducers/todos.js ***!
+  \******************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var todos = function todos() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "ADD_TODO":
+	      return [].concat(_toConsumableArray(state), [{
+	        text: action.text,
+	        completed: false,
+	        id: action.id
+	      }]);
+	    case "TOGGLE_TODO":
+	      return state.map(function (todo) {
+	        if (todo.id === action.id) {
+	          return Object.assign({}, todo, {
+	            completed: !todo.completed
+	          });
+	        }
+	        return todo;
+	      });
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = todos;
+
+/***/ },
+/* 227 */
+/*!***********************************************!*\
+  !*** ./src/client/app/reducers/nextTodoId.js ***!
+  \***********************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var nextTodoId = function nextTodoId() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "ADD_TODO":
+	      return state + 1;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = nextTodoId;
+
+/***/ },
+/* 228 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/reducers/visibilityFilter.js ***!
+  \*****************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var visibilityFilter = function visibilityFilter() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "SHOW_ALL";
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "SET_VISIBILITY_FILTER":
+	      return action.filter;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = visibilityFilter;
 
 /***/ }
 /******/ ]);
