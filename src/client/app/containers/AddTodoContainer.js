@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AddTodo from '../components/AddTodo';
+import { addTodo } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -11,11 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddTodoClick: (text, id) => {
-      dispatch({
-        type: "ADD_TODO",
-        text: text,
-        id: id
-      });
+      dispatch(addTodo(text, id));
     }
   };
 };

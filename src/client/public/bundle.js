@@ -24494,6 +24494,8 @@
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
+	var _actions = __webpack_require__(/*! ../actions */ 229);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -24505,10 +24507,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 	  return {
 	    setFilter: function setFilter() {
-	      dispatch({
-	        type: "SET_VISIBILITY_FILTER",
-	        filter: ownProps.filter
-	      });
+	      dispatch((0, _actions.setVisibilityFilter)(ownProps.filter));
 	    }
 	  };
 	};
@@ -24584,6 +24583,8 @@
 	
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 	
+	var _actions = __webpack_require__(/*! ../actions */ 229);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var filterTodo = function filterTodo(todos, filter) {
@@ -24610,10 +24611,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    toggleTodo: function toggleTodo(id) {
-	      dispatch({
-	        type: "TOGGLE_TODO",
-	        id: id
-	      });
+	      dispatch((0, _actions.toggleTodo)(id));
 	    }
 	  };
 	};
@@ -24721,6 +24719,8 @@
 	
 	var _AddTodo2 = _interopRequireDefault(_AddTodo);
 	
+	var _actions = __webpack_require__(/*! ../actions */ 229);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -24732,11 +24732,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    onAddTodoClick: function onAddTodoClick(text, id) {
-	      dispatch({
-	        type: "ADD_TODO",
-	        text: text,
-	        id: id
-	      });
+	      dispatch((0, _actions.addTodo)(text, id));
 	    }
 	  };
 	};
@@ -24919,6 +24915,47 @@
 	};
 	
 	exports.default = visibilityFilter;
+
+/***/ },
+/* 229 */
+/*!***********************************!*\
+  !*** ./src/client/app/actions.js ***!
+  \***********************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.addTodo = addTodo;
+	exports.toggleTodo = toggleTodo;
+	exports.setVisibilityFilter = setVisibilityFilter;
+	var ADD_TODO = exports.ADD_TODO = "ADD_TODO";
+	var TOGGLE_TODO = exports.TOGGLE_TODO = "TOGGLE_TODO";
+	var SET_VISIBILITY_FILTER = exports.SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
+	
+	function addTodo(text, id) {
+	  return {
+	    type: ADD_TODO,
+	    text: text,
+	    id: id
+	  };
+	};
+	
+	function toggleTodo(id) {
+	  return {
+	    type: TOGGLE_TODO,
+	    id: id
+	  };
+	};
+	
+	function setVisibilityFilter(filter) {
+	  return {
+	    type: SET_VISIBILITY_FILTER,
+	    filter: filter
+	  };
+	};
 
 /***/ }
 /******/ ]);
