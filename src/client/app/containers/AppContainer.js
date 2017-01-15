@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import App from '../App';
+import App from '../components/App';
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos,
     nextTodoId: state.nextTodoId,
     visibilityFilter: state.visibilityFilter
   };
@@ -16,12 +15,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "ADD_TODO",
         text: text,
-        id: id
-      });
-    },
-    toggleTodo: (id) => {
-      dispatch({
-        type: "TOGGLE_TODO",
         id: id
       });
     }

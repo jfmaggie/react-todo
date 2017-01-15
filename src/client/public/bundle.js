@@ -24378,113 +24378,7 @@
 	}
 
 /***/ },
-/* 216 */
-/*!*******************************!*\
-  !*** ./src/client/app/App.js ***!
-  \*******************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _FilterLink = __webpack_require__(/*! ./containers/FilterLink */ 219);
-	
-	var _FilterLink2 = _interopRequireDefault(_FilterLink);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var filterTodo = function filterTodo(todos, filter) {
-	  switch (filter) {
-	    case "SHOW_ALL":
-	      return todos;
-	    case "SHOW_ACTIVE":
-	      return todos.filter(function (todo) {
-	        return !todo.completed;
-	      });
-	    case "SHOW_COMPLETED":
-	      return todos.filter(function (todo) {
-	        return todo.completed;
-	      });
-	  }
-	};
-	
-	var App = function App(_ref) {
-	  var todos = _ref.todos,
-	      onAddTodoClick = _ref.onAddTodoClick,
-	      nextTodoId = _ref.nextTodoId,
-	      toggleTodo = _ref.toggleTodo,
-	      visibilityFilter = _ref.visibilityFilter;
-	
-	  var input = void 0;
-	  var filteredTodo = filterTodo(todos, visibilityFilter);
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('input', { type: 'text', ref: function ref(node) {
-	        input = node;
-	      } }),
-	    _react2.default.createElement(
-	      'button',
-	      { onClick: function onClick() {
-	          onAddTodoClick(input.value, nextTodoId);
-	          input.value = '';
-	        } },
-	      'Add Todo'
-	    ),
-	    _react2.default.createElement(
-	      'ul',
-	      null,
-	      filteredTodo.map(function (todo, index) {
-	        return _react2.default.createElement(
-	          'li',
-	          { key: index, onClick: function onClick() {
-	              toggleTodo(todo.id);
-	            } },
-	          _react2.default.createElement(
-	            'span',
-	            { style: { textDecoration: todo.completed ? "line-through" : "none" } },
-	            todo.text
-	          )
-	        );
-	      })
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Show:',
-	      " ",
-	      _react2.default.createElement(
-	        _FilterLink2.default,
-	        { filter: 'SHOW_ALL' },
-	        'ALL'
-	      ),
-	      ", ",
-	      _react2.default.createElement(
-	        _FilterLink2.default,
-	        { filter: 'SHOW_ACTIVE' },
-	        'ACTIVE'
-	      ),
-	      ", ",
-	      _react2.default.createElement(
-	        _FilterLink2.default,
-	        { filter: 'SHOW_COMPLETED' },
-	        'COMPLETED'
-	      )
-	    )
-	  );
-	};
-	
-	exports.default = App;
-
-/***/ },
+/* 216 */,
 /* 217 */
 /*!******************************************!*\
   !*** ./src/client/app/reducers/index.js ***!
@@ -24577,7 +24471,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _App = __webpack_require__(/*! ../App */ 216);
+	var _App = __webpack_require__(/*! ../components/App */ 221);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -24585,7 +24479,6 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    todos: state.todos,
 	    nextTodoId: state.nextTodoId,
 	    visibilityFilter: state.visibilityFilter
 	  };
@@ -24597,12 +24490,6 @@
 	      dispatch({
 	        type: "ADD_TODO",
 	        text: text,
-	        id: id
-	      });
-	    },
-	    toggleTodo: function toggleTodo(id) {
-	      dispatch({
-	        type: "TOGGLE_TODO",
 	        id: id
 	      });
 	    }
@@ -24632,7 +24519,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _Link = __webpack_require__(/*! ../Link */ 220);
+	var _Link = __webpack_require__(/*! ../components/Link */ 222);
 	
 	var _Link2 = _interopRequireDefault(_Link);
 	
@@ -24660,10 +24547,66 @@
 	exports.default = FilterLink;
 
 /***/ },
-/* 220 */
-/*!********************************!*\
-  !*** ./src/client/app/Link.js ***!
-  \********************************/
+/* 220 */,
+/* 221 */
+/*!******************************************!*\
+  !*** ./src/client/app/components/App.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Footer = __webpack_require__(/*! ./Footer */ 223);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _TodoListContainer = __webpack_require__(/*! ../containers/TodoListContainer */ 224);
+	
+	var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var App = function App(_ref) {
+	  var onAddTodoClick = _ref.onAddTodoClick,
+	      nextTodoId = _ref.nextTodoId,
+	      visibilityFilter = _ref.visibilityFilter;
+	
+	  var input = void 0;
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('input', { type: 'text', ref: function ref(node) {
+	        input = node;
+	      } }),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick() {
+	          onAddTodoClick(input.value, nextTodoId);
+	          input.value = '';
+	        } },
+	      'Add Todo'
+	    ),
+	    _react2.default.createElement(_TodoListContainer2.default, null),
+	    _react2.default.createElement(_Footer2.default, null)
+	  );
+	};
+	
+	exports.default = App;
+
+/***/ },
+/* 222 */
+/*!*******************************************!*\
+  !*** ./src/client/app/components/Link.js ***!
+  \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24702,6 +24645,161 @@
 	};
 	
 	exports.default = Link;
+
+/***/ },
+/* 223 */
+/*!*********************************************!*\
+  !*** ./src/client/app/components/Footer.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _FilterLink = __webpack_require__(/*! ../containers/FilterLink */ 219);
+	
+	var _FilterLink2 = _interopRequireDefault(_FilterLink);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Footer = function Footer() {
+	  return _react2.default.createElement(
+	    'p',
+	    null,
+	    'Show:',
+	    " ",
+	    _react2.default.createElement(
+	      _FilterLink2.default,
+	      { filter: 'SHOW_ALL' },
+	      'ALL'
+	    ),
+	    ", ",
+	    _react2.default.createElement(
+	      _FilterLink2.default,
+	      { filter: 'SHOW_ACTIVE' },
+	      'ACTIVE'
+	    ),
+	    ", ",
+	    _react2.default.createElement(
+	      _FilterLink2.default,
+	      { filter: 'SHOW_COMPLETED' },
+	      'COMPLETED'
+	    )
+	  );
+	};
+	
+	exports.default = Footer;
+
+/***/ },
+/* 224 */
+/*!********************************************************!*\
+  !*** ./src/client/app/containers/TodoListContainer.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _TodoList = __webpack_require__(/*! ../components/TodoList */ 225);
+	
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var filterTodo = function filterTodo(todos, filter) {
+	  switch (filter) {
+	    case "SHOW_ALL":
+	      return todos;
+	    case "SHOW_ACTIVE":
+	      return todos.filter(function (todo) {
+	        return !todo.completed;
+	      });
+	    case "SHOW_COMPLETED":
+	      return todos.filter(function (todo) {
+	        return todo.completed;
+	      });
+	  }
+	};
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    filteredTodo: filterTodo(state.todos, state.visibilityFilter)
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    toggleTodo: function toggleTodo(id) {
+	      dispatch({
+	        type: "TOGGLE_TODO",
+	        id: id
+	      });
+	    }
+	  };
+	};
+	
+	var TodoListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_TodoList2.default);
+	
+	exports.default = TodoListContainer;
+
+/***/ },
+/* 225 */
+/*!***********************************************!*\
+  !*** ./src/client/app/components/TodoList.js ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TodoList = function TodoList(_ref) {
+	  var filteredTodo = _ref.filteredTodo,
+	      toggleTodo = _ref.toggleTodo;
+	  return _react2.default.createElement(
+	    "ul",
+	    null,
+	    filteredTodo.map(function (todo, index) {
+	      return _react2.default.createElement(
+	        "li",
+	        { key: index, onClick: function onClick() {
+	            toggleTodo(todo.id);
+	          } },
+	        _react2.default.createElement(
+	          "span",
+	          { style: { textDecoration: todo.completed ? "line-through" : "none" } },
+	          todo.text
+	        )
+	      );
+	    })
+	  );
+	};
+	
+	exports.default = TodoList;
 
 /***/ }
 /******/ ]);
