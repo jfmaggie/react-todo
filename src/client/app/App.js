@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const App = ({ todos, onAddTodoClick, nextTodoId }) => {
+const App = ({ todos, onAddTodoClick, nextTodoId, toggleTodo }) => {
   let input;
 
   return (
@@ -15,7 +15,11 @@ const App = ({ todos, onAddTodoClick, nextTodoId }) => {
       }} >Add Todo</button>
       <ul>
         {todos.map((todo, index) =>
-          <li key={index}>{todo.text}</li>
+          <li key={index} onClick={() => {
+            toggleTodo(todo.id)
+          }}>
+            <span style={{textDecoration: todo.completed ? "line-through" : "none"}}>{todo.text}</span>
+          </li>
         )}
       </ul>
     </div>

@@ -24399,7 +24399,8 @@
 	var App = function App(_ref) {
 	  var todos = _ref.todos,
 	      onAddTodoClick = _ref.onAddTodoClick,
-	      nextTodoId = _ref.nextTodoId;
+	      nextTodoId = _ref.nextTodoId,
+	      toggleTodo = _ref.toggleTodo;
 	
 	  var input = void 0;
 	
@@ -24423,8 +24424,14 @@
 	      todos.map(function (todo, index) {
 	        return _react2.default.createElement(
 	          'li',
-	          { key: index },
-	          todo.text
+	          { key: index, onClick: function onClick() {
+	              toggleTodo(todo.id);
+	            } },
+	          _react2.default.createElement(
+	            'span',
+	            { style: { textDecoration: todo.completed ? "line-through" : "none" } },
+	            todo.text
+	          )
 	        );
 	      })
 	    )
@@ -24461,7 +24468,15 @@
 	        completed: false,
 	        id: action.id
 	      }]);
-	
+	    case "TOGGLE_TODO":
+	      return state.map(function (todo) {
+	        if (todo.id === action.id) {
+	          return Object.assign({}, todo, {
+	            completed: !todo.completed
+	          });
+	        }
+	        return todo;
+	      });
 	    default:
 	      return state;
 	  }
@@ -24521,6 +24536,12 @@
 	      dispatch({
 	        type: "ADD_TODO",
 	        text: text,
+	        id: id
+	      });
+	    },
+	    toggleTodo: function toggleTodo(id) {
+	      dispatch({
+	        type: "TOGGLE_TODO",
 	        id: id
 	      });
 	    }

@@ -17,6 +17,12 @@ const mapDispatchToProps = (dispatch) => {
         text: text,
         id: id
       });
+    },
+    toggleTodo: (id) => {
+      dispatch({
+        type: "TOGGLE_TODO",
+        id: id
+      });
     }
   };
 };
