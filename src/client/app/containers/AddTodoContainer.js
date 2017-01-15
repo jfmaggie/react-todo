@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import App from '../components/App';
+import AddTodo from '../components/AddTodo';
 
 const mapStateToProps = (state) => {
   return {
-    nextTodoId: state.nextTodoId,
-    visibilityFilter: state.visibilityFilter
+    nextTodoId: state.nextTodoId
   };
 };
 
@@ -21,9 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const AppContainer = connect(
+const AddTodoContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(AddTodo);
 
-export default AppContainer;
+export default AddTodoContainer;

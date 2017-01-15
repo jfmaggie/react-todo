@@ -59,9 +59,9 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _AppContainer = __webpack_require__(/*! ./containers/AppContainer */ 216);
+	var _App = __webpack_require__(/*! ./components/App */ 217);
 	
-	var _AppContainer2 = _interopRequireDefault(_AppContainer);
+	var _App2 = _interopRequireDefault(_App);
 	
 	var _reducers = __webpack_require__(/*! ./reducers */ 223);
 	
@@ -74,7 +74,7 @@
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_AppContainer2.default, null)
+	  _react2.default.createElement(_App2.default, null)
 	), document.getElementById('root'));
 
 /***/ },
@@ -24378,54 +24378,7 @@
 	}
 
 /***/ },
-/* 216 */
-/*!***************************************************!*\
-  !*** ./src/client/app/containers/AppContainer.js ***!
-  \***************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
-	
-	var _App = __webpack_require__(/*! ../components/App */ 217);
-	
-	var _App2 = _interopRequireDefault(_App);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    nextTodoId: state.nextTodoId,
-	    visibilityFilter: state.visibilityFilter
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onAddTodoClick: function onAddTodoClick(text, id) {
-	      dispatch({
-	        type: "ADD_TODO",
-	        text: text,
-	        id: id
-	      });
-	    }
-	  };
-	};
-	
-	var AppContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App2.default);
-	
-	exports.default = AppContainer;
-
-/***/ },
+/* 216 */,
 /* 217 */
 /*!******************************************!*\
   !*** ./src/client/app/components/App.js ***!
@@ -24450,29 +24403,17 @@
 	
 	var _TodoListContainer2 = _interopRequireDefault(_TodoListContainer);
 	
+	var _AddTodoContainer = __webpack_require__(/*! ../containers/AddTodoContainer */ 225);
+	
+	var _AddTodoContainer2 = _interopRequireDefault(_AddTodoContainer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var App = function App(_ref) {
-	  var onAddTodoClick = _ref.onAddTodoClick,
-	      nextTodoId = _ref.nextTodoId,
-	      visibilityFilter = _ref.visibilityFilter;
-	
-	  var input = void 0;
-	
+	var App = function App() {
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement('input', { type: 'text', ref: function ref(node) {
-	        input = node;
-	      } }),
-	    _react2.default.createElement(
-	      'button',
-	      { onClick: function onClick() {
-	          onAddTodoClick(input.value, nextTodoId);
-	          input.value = '';
-	        } },
-	      'Add Todo'
-	    ),
+	    _react2.default.createElement(_AddTodoContainer2.default, null),
 	    _react2.default.createElement(_TodoListContainer2.default, null),
 	    _react2.default.createElement(_Footer2.default, null)
 	  );
@@ -24831,6 +24772,97 @@
 	};
 	
 	exports.default = Todo;
+
+/***/ },
+/* 225 */
+/*!*******************************************************!*\
+  !*** ./src/client/app/containers/AddTodoContainer.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _AddTodo = __webpack_require__(/*! ../components/AddTodo */ 226);
+	
+	var _AddTodo2 = _interopRequireDefault(_AddTodo);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    nextTodoId: state.nextTodoId
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onAddTodoClick: function onAddTodoClick(text, id) {
+	      dispatch({
+	        type: "ADD_TODO",
+	        text: text,
+	        id: id
+	      });
+	    }
+	  };
+	};
+	
+	var AddTodoContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddTodo2.default);
+	
+	exports.default = AddTodoContainer;
+
+/***/ },
+/* 226 */
+/*!**********************************************!*\
+  !*** ./src/client/app/components/AddTodo.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var AddTodo = function AddTodo(_ref) {
+	  var onAddTodoClick = _ref.onAddTodoClick,
+	      nextTodoId = _ref.nextTodoId;
+	
+	  var input = void 0;
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement('input', { type: 'text', ref: function ref(node) {
+	        input = node;
+	      } }),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: function onClick() {
+	          onAddTodoClick(input.value, nextTodoId);
+	          input.value = '';
+	        } },
+	      'Add Todo'
+	    )
+	  );
+	};
+	
+	exports.default = AddTodo;
 
 /***/ }
 /******/ ]);
