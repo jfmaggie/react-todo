@@ -24394,15 +24394,36 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _FilterLink = __webpack_require__(/*! ./containers/FilterLink */ 219);
+	
+	var _FilterLink2 = _interopRequireDefault(_FilterLink);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var filterTodo = function filterTodo(todos, filter) {
+	  switch (filter) {
+	    case "SHOW_ALL":
+	      return todos;
+	    case "SHOW_ACTIVE":
+	      return todos.filter(function (todo) {
+	        return !todo.completed;
+	      });
+	    case "SHOW_COMPLETED":
+	      return todos.filter(function (todo) {
+	        return todo.completed;
+	      });
+	  }
+	};
 	
 	var App = function App(_ref) {
 	  var todos = _ref.todos,
 	      onAddTodoClick = _ref.onAddTodoClick,
 	      nextTodoId = _ref.nextTodoId,
-	      toggleTodo = _ref.toggleTodo;
+	      toggleTodo = _ref.toggleTodo,
+	      visibilityFilter = _ref.visibilityFilter;
 	
 	  var input = void 0;
+	  var filteredTodo = filterTodo(todos, visibilityFilter);
 	
 	  return _react2.default.createElement(
 	    'div',
@@ -24421,7 +24442,7 @@
 	    _react2.default.createElement(
 	      'ul',
 	      null,
-	      todos.map(function (todo, index) {
+	      filteredTodo.map(function (todo, index) {
 	        return _react2.default.createElement(
 	          'li',
 	          { key: index, onClick: function onClick() {
@@ -24434,6 +24455,29 @@
 	          )
 	        );
 	      })
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Show:',
+	      " ",
+	      _react2.default.createElement(
+	        _FilterLink2.default,
+	        { filter: 'SHOW_ALL' },
+	        'ALL'
+	      ),
+	      ", ",
+	      _react2.default.createElement(
+	        _FilterLink2.default,
+	        { filter: 'SHOW_ACTIVE' },
+	        'ACTIVE'
+	      ),
+	      ", ",
+	      _react2.default.createElement(
+	        _FilterLink2.default,
+	        { filter: 'SHOW_COMPLETED' },
+	        'COMPLETED'
+	      )
 	    )
 	  );
 	};
@@ -24494,7 +24538,23 @@
 	  }
 	};
 	
-	var reducers = (0, _redux.combineReducers)({ todos: todos, nextTodoId: nextTodoId });
+	var visibilityFilter = function visibilityFilter() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "SHOW_ALL";
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case "SET_VISIBILITY_FILTER":
+	      return action.filter;
+	    default:
+	      return state;
+	  }
+	};
+	
+	var reducers = (0, _redux.combineReducers)({
+	  todos: todos,
+	  nextTodoId: nextTodoId,
+	  visibilityFilter: visibilityFilter
+	});
 	
 	exports.default = reducers;
 
@@ -24526,7 +24586,8 @@
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
 	    todos: state.todos,
-	    nextTodoId: state.nextTodoId
+	    nextTodoId: state.nextTodoId,
+	    visibilityFilter: state.visibilityFilter
 	  };
 	};
 	
@@ -24551,6 +24612,96 @@
 	var AppContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App2.default);
 	
 	exports.default = AppContainer;
+
+/***/ },
+/* 219 */
+/*!*************************************************!*\
+  !*** ./src/client/app/containers/FilterLink.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _Link = __webpack_require__(/*! ../Link */ 220);
+	
+	var _Link2 = _interopRequireDefault(_Link);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    visibilityFilter: state.visibilityFilter
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+	  return {
+	    setFilter: function setFilter() {
+	      dispatch({
+	        type: "SET_VISIBILITY_FILTER",
+	        filter: ownProps.filter
+	      });
+	    }
+	  };
+	};
+	
+	var FilterLink = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Link2.default);
+	
+	exports.default = FilterLink;
+
+/***/ },
+/* 220 */
+/*!********************************!*\
+  !*** ./src/client/app/Link.js ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Link = function Link(_ref) {
+	  var visibilityFilter = _ref.visibilityFilter,
+	      setFilter = _ref.setFilter,
+	      children = _ref.children,
+	      filter = _ref.filter;
+	
+	  if (filter === visibilityFilter) {
+	    return _react2.default.createElement(
+	      "span",
+	      null,
+	      children
+	    );
+	  }
+	  return _react2.default.createElement(
+	    "a",
+	    { href: "#", onClick: function onClick(e) {
+	        e.preventDefault();
+	        setFilter();
+	      } },
+	    children
+	  );
+	};
+	
+	exports.default = Link;
 
 /***/ }
 /******/ ]);

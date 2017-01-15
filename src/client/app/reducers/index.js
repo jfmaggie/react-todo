@@ -34,6 +34,19 @@ const nextTodoId = (state = 1, action) => {
   }
 };
 
-const reducers = combineReducers({ todos: todos, nextTodoId: nextTodoId });
+const visibilityFilter = (state = "SHOW_ALL", action) => {
+  switch (action.type) {
+    case "SET_VISIBILITY_FILTER":
+      return action.filter
+    default:
+      return state;
+  }
+};
+
+const reducers = combineReducers({
+  todos: todos,
+  nextTodoId: nextTodoId,
+  visibilityFilter: visibilityFilter
+});
 
 export default reducers;

@@ -5,7 +5,8 @@ import App from '../App';
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
-    nextTodoId: state.nextTodoId
+    nextTodoId: state.nextTodoId,
+    visibilityFilter: state.visibilityFilter
   };
 };
 
