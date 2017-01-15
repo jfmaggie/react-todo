@@ -24411,7 +24411,7 @@
 	var App = function App() {
 	  return _react2.default.createElement(
 	    'div',
-	    null,
+	    { className: 'uk-container app-container' },
 	    _react2.default.createElement(_AddTodoContainer2.default, null),
 	    _react2.default.createElement(_TodoListContainer2.default, null),
 	    _react2.default.createElement(_Footer2.default, null)
@@ -24648,7 +24648,7 @@
 	      toggleTodo = _ref.toggleTodo;
 	  return _react2.default.createElement(
 	    'ul',
-	    null,
+	    { className: 'uk-list' },
 	    filteredTodo.map(function (todo, index) {
 	      return _react2.default.createElement(_Todo2.default, { key: index, toggleTodo: toggleTodo, id: todo.id, text: todo.text, completed: todo.completed });
 	    })
@@ -24748,7 +24748,7 @@
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -24767,18 +24767,18 @@
 	  var input = void 0;
 	
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement('input', { type: 'text', ref: function ref(node) {
+	    "div",
+	    { className: "uk-container-center" },
+	    _react2.default.createElement("input", { className: "new-todo", placeholder: "What needs to be done?", type: "text", ref: function ref(node) {
 	        input = node;
 	      } }),
 	    _react2.default.createElement(
-	      'button',
-	      { onClick: function onClick() {
+	      "button",
+	      { className: "uk-button add-todo", onClick: function onClick() {
 	          onAddTodoClick(input.value, nextTodoId);
 	          input.value = '';
 	        } },
-	      'Add Todo'
+	      " + "
 	    )
 	  );
 	};

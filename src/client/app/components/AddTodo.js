@@ -4,14 +4,14 @@ const AddTodo = ({ onAddTodoClick, nextTodoId }) => {
   let input;
 
   return (
-    <div>
-      <input type="text" ref={node => {
+    <div className="uk-container-center">
+      <input className="new-todo" placeholder="What needs to be done?" type="text" ref={node => {
         input = node
       }} />
-      <button onClick={() => {
+      <button className="uk-button add-todo" onClick={() => {
         onAddTodoClick(input.value, nextTodoId)
         input.value = ''
-      }} >Add Todo</button>
+      }} > + </button>
     </div>
   );
 };
